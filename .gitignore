@@ -1,4 +1,5 @@
-
+.gradle
+build/
 selenium-webdriver/build/
 
 # Ignore Gradle GUI config
