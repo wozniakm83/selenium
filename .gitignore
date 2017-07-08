@@ -18,4 +18,4 @@ gradle-app.setting
 
 *.log
 .idea/workspace.xml
-selenium-webdriver/build/classes/test/pl/sel/selenium/FirstWebTest.class
+
