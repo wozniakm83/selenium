@@ -20,6 +20,7 @@ public class FirstWebTest {
     @Test
     public void testStartBrowser() {
         wd.get("http://www.google.com/");
+
     }
     
     @AfterMethod

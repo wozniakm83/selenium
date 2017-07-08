@@ -1,5 +1,6 @@
 .gradle
 build/
+selenium-webdriver/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -16,3 +17,5 @@ gradle-app.setting
 .idea/misc.xml
 
 *.log
+.idea/workspace.xml
+selenium-webdriver/build/classes/test/pl/sel/selenium/FirstWebTest.class
