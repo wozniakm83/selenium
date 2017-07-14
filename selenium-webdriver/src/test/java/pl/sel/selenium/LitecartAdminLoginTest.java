@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -31,7 +30,7 @@ public class LitecartAdminLoginTest {
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }*/
 
-    @BeforeMethod(enabled=false)
+    @BeforeMethod(enabled=true)
     public void startChrome() throws Exception {
         ChromeOptions options = new ChromeOptions();
         options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
@@ -59,12 +58,11 @@ public class LitecartAdminLoginTest {
         wait = new WebDriverWait(wd, 10);
     }
 
-    @BeforeMethod(enabled=true)
+    @BeforeMethod(enabled=false)
     public void startFirefoxNew() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(FirefoxDriver.MARIONETTE, true);
         wd = new FirefoxDriver(caps);
-        //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true)); /// ???
         System.out.println(((HasCapabilities) wd).getCapabilities());
         wait = new WebDriverWait(wd, 10);
     }
