@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
@@ -15,7 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +24,7 @@ public class ApplicationManager {
     WebDriverWait wait;
 
     private String browser;
+    private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
 
     public ApplicationManager(String browser) {
@@ -35,8 +34,9 @@ public class ApplicationManager {
 
     public void init() throws Exception {
         String target = System.getProperty("target", "local");
-        navigationHelper = new NavigationHelper(this);
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        navigationHelper = new NavigationHelper(this);
+        sessionHelper = new SessionHelper(this);
     }
 
     public void stop() {
@@ -45,7 +45,11 @@ public class ApplicationManager {
         }
     }
 
-    public NavigationHelper goTo(String s) { return navigationHelper; }
+    public SessionHelper login() {
+        return sessionHelper;
+    }
+
+    public NavigationHelper goTo() { return navigationHelper; }
 
     public void startChrome() throws Exception {
         ChromeOptions options = new ChromeOptions();
@@ -90,10 +94,6 @@ public class ApplicationManager {
         wait = new WebDriverWait(wd, 10);
     }
 
-    public String getProperty(String key) {
-        return properties.getProperty(key);
-    }
-
     public WebDriver getDriver() throws Exception {
         if(wd == null) {
             if (browser.equals(BrowserType.FIREFOX)) {
@@ -104,7 +104,7 @@ public class ApplicationManager {
                 startIExplorer();
             }
             wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            //wd.get(properties.getProperty("web.baseUrl"));
+            wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;
     }
