@@ -16,14 +16,4 @@ public class SessionHelper extends HelperBase {
         }
         click(By.name("login"));
     }
-
-/*    public void adminLogin(String username, String password) {
-        wd.findElement(By.name("username")).sendKeys("admin");
-        wd.findElement(By.name("password")).sendKeys("admin");
-        if (!wd.findElement(By.name("remember_me")).isSelected()) {
-            wd.findElement(By.name("remember_me")).click();
-        }
-        wd.findElement(By.name("login")).click();
-    }*/
-
 }
