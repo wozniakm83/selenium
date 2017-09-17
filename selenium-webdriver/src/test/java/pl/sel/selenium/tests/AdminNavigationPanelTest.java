@@ -29,9 +29,11 @@ public class AdminNavigationPanelTest extends TestBase {
                 for (int n=1; n<=subelements.size(); n++) {
                     subelements = wd.findElements(By.cssSelector("#app- > ul > li"));
                     subelements.get(n-1).click();
+                    isElementPresent(By.cssSelector("#content > h1"));
                     System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
                 }
             } else {
+                isElementPresent(By.cssSelector("#content > h1"));
                 System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
             }
         }
