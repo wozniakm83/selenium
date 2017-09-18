@@ -21,20 +21,26 @@ public class AdminNavigationPanelTest extends TestBase {
     @Test
     public void testAdminNavigationPanel() {
         List<WebElement> elements = wd.findElements(By.id("app-"));
-        for (int i=1; i<=elements.size(); i++){
+        for (int i=1; i<=elements.size(); i++) {
             elements = wd.findElements(By.id("app-"));
-            elements.get(i-1).click();
-            if(isElementPresent(By.cssSelector("#app- > ul > li"))) {
+            elements.get(i - 1).click();
+            if (isElementPresent(By.cssSelector("#app- > ul > li"))) {
                 List<WebElement> subelements = wd.findElements(By.cssSelector("#app- > ul > li"));
-                for (int n=1; n<=subelements.size(); n++) {
+                for (int n = 1; n <= subelements.size(); n++) {
                     subelements = wd.findElements(By.cssSelector("#app- > ul > li"));
-                    subelements.get(n-1).click();
-                    isElementPresent(By.cssSelector("#content > h1"));
-                    System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
+                    subelements.get(n - 1).click();
+                    if (wd.findElement(By.cssSelector("#content > h1")).isDisplayed()) {
+                        System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
+                    } else {
+                        System.out.println("Header not displayed");
+                    }
                 }
             } else {
-                isElementPresent(By.cssSelector("#content > h1"));
-                System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
+                if (wd.findElement(By.cssSelector("#content > h1")).isDisplayed()) {
+                    System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
+                } else {
+                    System.out.println("Header not displayed");
+                }
             }
         }
     }
