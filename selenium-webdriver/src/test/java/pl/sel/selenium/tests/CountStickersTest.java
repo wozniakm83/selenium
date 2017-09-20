@@ -17,7 +17,7 @@ public class CountStickersTest extends TestBase {
         List<WebElement> articles = wd.findElements(By.cssSelector("div.content div > ul a.link"));
         for (WebElement article : articles) {
             List<WebElement> stickers = article.findElements(
-                    By.cssSelector("div.image-wrapper > div[class='sticker sale'"));
+                    By.cssSelector("div.image-wrapper > div[class='sticker sale']"));
             if (stickers.size() > 0) {
                 assertThat(stickers.size(), equalTo(1));
             }

@@ -34,4 +34,22 @@ public class TestBase {
             return false;
         }
     }
+
+    public void adminLogin() throws InterruptedException {
+        app.goTo().adminPage();
+        app.login().adminLogin(
+                app.properties.getProperty("litecart.adminLogin"),
+                app.properties.getProperty("litecart.adminPassword")
+        );
+    }
+
+    public static <E extends Comparable<E>> boolean isSorted(Iterable<E> collection) {
+        E previous = null;
+        for (E value : collection) {
+            if (previous != null && previous.compareTo(value) > 0)
+                return false;
+            previous = value;
+        }
+        return true;
+    }
 }

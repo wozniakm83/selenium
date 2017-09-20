@@ -10,18 +10,14 @@ import java.util.List;
 public class AdminNavigationPanelTest extends TestBase {
 
     @BeforeMethod
-    public void testLoginToLitecartAdmin() throws InterruptedException {
-        app.goTo().adminPage();
-        app.login().adminLogin(
-                app.properties.getProperty("litecart.adminLogin"),
-                app.properties.getProperty("litecart.adminPassword")
-        );
+    public void loginToAdminPage() throws InterruptedException {
+        adminLogin();
     }
 
     @Test
     public void testAdminNavigationPanel() {
         List<WebElement> elements = wd.findElements(By.id("app-"));
-        for (int i=1; i<=elements.size(); i++) {
+        for (int i = 1; i <= elements.size(); i++) {
             elements = wd.findElements(By.id("app-"));
             elements.get(i - 1).click();
             if (isElementPresent(By.cssSelector("#app- > ul > li"))) {
@@ -29,19 +25,18 @@ public class AdminNavigationPanelTest extends TestBase {
                 for (int n = 1; n <= subelements.size(); n++) {
                     subelements = wd.findElements(By.cssSelector("#app- > ul > li"));
                     subelements.get(n - 1).click();
-                    if (wd.findElement(By.cssSelector("#content > h1")).isDisplayed()) {
-                        System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
-                    } else {
-                        System.out.println("Header not displayed");
-                    }
+                    checkHeaderIfAvailable();
                 }
             } else {
-                if (wd.findElement(By.cssSelector("#content > h1")).isDisplayed()) {
-                    System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
-                } else {
-                    System.out.println("Header not displayed");
-                }
+                checkHeaderIfAvailable();
             }
+        }
+    }
+    private void checkHeaderIfAvailable() {
+        if (wd.findElement(By.cssSelector("#content > h1")).isDisplayed()) {
+            System.out.println(wd.findElement(By.cssSelector("#content > h1")).getText());
+        } else {
+            System.out.println("Header not displayed");
         }
     }
 }
