@@ -24,6 +24,7 @@ public class ApplicationManager {
     WebDriverWait wait;
 
     private String browser;
+    private ArticleHelper articleHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
 
@@ -35,6 +36,7 @@ public class ApplicationManager {
     public void init() throws Exception {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        articleHelper = new ArticleHelper(this);
         navigationHelper = new NavigationHelper(this);
         sessionHelper = new SessionHelper(this);
     }
@@ -43,6 +45,10 @@ public class ApplicationManager {
         if(wd != null) {
             wd.quit();
         }
+    }
+
+    public ArticleHelper article() {
+        return articleHelper;
     }
 
     public SessionHelper login() {
