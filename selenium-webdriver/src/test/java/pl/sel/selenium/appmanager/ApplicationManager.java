@@ -25,6 +25,7 @@ public class ApplicationManager {
 
     private String browser;
     private ArticleHelper articleHelper;
+    private CustomerHelper customerHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
 
@@ -37,6 +38,7 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         articleHelper = new ArticleHelper(this);
+        customerHelper = new CustomerHelper(this);
         navigationHelper = new NavigationHelper(this);
         sessionHelper = new SessionHelper(this);
     }
@@ -50,6 +52,8 @@ public class ApplicationManager {
     public ArticleHelper article() {
         return articleHelper;
     }
+
+    public CustomerHelper customer() { return customerHelper; }
 
     public SessionHelper login() {
         return sessionHelper;

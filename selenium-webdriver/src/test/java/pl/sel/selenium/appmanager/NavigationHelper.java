@@ -24,4 +24,14 @@ public class NavigationHelper extends HelperBase {
         wd.get("http://localhost/litecart/");
     }
 
+    public void userRegistrationPage() {
+        app.goTo().mainPage();
+        if(isElementPresent(By.tagName("h1"))
+                && wd.findElement(By.tagName("h1")).getText().equals("Create Account")) {
+            return;
+        }
+        wd.findElement(By.cssSelector("#box-account-login a")).click();
+    }
 }
+
+// > div > form > table > tbody > tr:nth-child(5) > td >
