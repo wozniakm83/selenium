@@ -8,6 +8,7 @@ public class CustomerRegistrationTest extends TestBase {
 
     @Test
     public void testCustomerRegistration() {
+
         app.goTo().userRegistrationPage();
 
         long unixTime = System.currentTimeMillis() / 1000L;
