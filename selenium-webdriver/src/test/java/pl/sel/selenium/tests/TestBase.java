@@ -8,6 +8,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pl.sel.selenium.appmanager.ApplicationManager;
 
+import java.io.File;
+
 public class TestBase {
 
     WebDriver wd;
@@ -52,4 +54,11 @@ public class TestBase {
         }
         return true;
     }
+
+    public String getFilePath(String filepath) {
+        File file = new File(filepath);
+        String path = file.getAbsolutePath();
+        return path;
+    }
+
 }

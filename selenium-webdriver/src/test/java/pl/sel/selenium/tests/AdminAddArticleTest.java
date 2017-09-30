@@ -6,8 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class AdminAddArticleTest extends TestBase {
 
@@ -50,9 +52,12 @@ public class AdminAddArticleTest extends TestBase {
         generalTab.findElement(By.cssSelector("select[name='quantity_unit_id']")).sendKeys("pcs");
         generalTab.findElement(By.cssSelector("select[name='delivery_status_id']")).sendKeys("3-5 days");
         generalTab.findElement(By.cssSelector("select[name='sold_out_status_id']")).sendKeys("Temporary Sold Out");
-        generalTab.findElement(By.cssSelector("input[name='new_images[]']")).sendKeys(getFilePath());
-        generalTab.findElement(By.cssSelector("input[name='date_valid_from']")).sendKeys(Keys.HOME + "2018" + Keys.TAB + "0101");
-        generalTab.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys(Keys.HOME + "2019" + Keys.TAB + "0101");
+        generalTab.findElement(By.cssSelector("input[name='new_images[]']"))
+                .sendKeys(getFilePath(app.properties.getProperty("product.defaultImage")));
+        generalTab.findElement(By.cssSelector("input[name='date_valid_from']"))
+                .sendKeys(Keys.HOME + "2018" + Keys.TAB + "0101");
+        generalTab.findElement(By.cssSelector("input[name='date_valid_to']"))
+                .sendKeys(Keys.HOME + "2019" + Keys.TAB + "0101");
 
         wd.findElement(By.cssSelector("#content a[href='#tab-information']")).click();
         WebElement informationTab = wd.findElement(By.cssSelector("#tab-information"));
@@ -73,9 +78,11 @@ public class AdminAddArticleTest extends TestBase {
         pricesTab.findElement(By.cssSelector("input[name='prices[EUR]']")).sendKeys("13,45");
         pricesTab.findElement(By.cssSelector("input[name='gross_prices[EUR]']")).sendKeys("13,45");
 
-        pricesTab.findElement(By.xpath("//a[@id='add-campaign']/i")).click();
-        pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][start_date]']")).sendKeys(Keys.HOME + "2018" + Keys.TAB + "0101 00:00");
-        pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][end_date]']")).sendKeys(Keys.HOME + "2019" + Keys.TAB + "0101 00:00");
+        pricesTab.findElement(By.cssSelector("#add-campaign > i")).click();
+        pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][start_date]']"))
+                .sendKeys(Keys.HOME + "2018" + Keys.TAB + "0101 00:00");
+        pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][end_date]']"))
+                .sendKeys(Keys.HOME + "2019" + Keys.TAB + "0101 00:00");
         pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][percentage]']")).clear();
         pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][percentage]']")).sendKeys("30,00");
         //pricesTab.findElement(By.cssSelector("input[name='campaigns[new_1][USD]']")).sendKeys("10,00");
@@ -83,18 +90,11 @@ public class AdminAddArticleTest extends TestBase {
 
         wd.findElement(By.xpath("//*[@id='content']/form/p/span/button[@name='save']")).click();
 
-        wd.findElement(By.xpath("//li[@id='doc-catalog']//span[.='Catalog']")).click();
-        wd.findElement(By.cssSelector("#content > form > table > tbody > tr:nth-child(3) > td:nth-child(3) > a")).click();
+        wd.findElement(By.cssSelector("#doc-catalog > a")).click();
         if (!isElementPresent(By.linkText(productName))) {
             System.out.println("Product not found");
         }
-    }
-
-    public String getFilePath() {
-        String filepath = new String(app.properties.getProperty("product.defaultImage"));
-        File file = new File(filepath);
-        String path = file.getAbsolutePath();
-        return path;
+        assertThat(isElementPresent(By.linkText(productName)), equalTo(true));
     }
 }
 
