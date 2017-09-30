@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeSuite;
 import pl.sel.selenium.appmanager.ApplicationManager;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
@@ -34,6 +35,24 @@ public class TestBase {
             return true;
         } catch (NoSuchElementException ex) {
             return false;
+        }
+    }
+
+/*    protected boolean isElementPresent(By locator) {
+        try {
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            return wd.findElements(locator).size() > 0;
+        } finally {
+            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        }
+    }*/
+
+    protected boolean isElementNotPresent(By locator) {
+        try {
+            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            return wd.findElements(locator).size() == 0;
+        } finally {
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
     }
 
