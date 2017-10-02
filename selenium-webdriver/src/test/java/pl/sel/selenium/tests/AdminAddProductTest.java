@@ -12,7 +12,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class AdminAddArticleTest extends TestBase {
+public class AdminAddProductTest extends TestBase {
 
     @BeforeMethod
     public void loginToAdminPage() throws InterruptedException {
@@ -20,7 +20,7 @@ public class AdminAddArticleTest extends TestBase {
     }
 
     @Test
-    public void testAddArticle() throws InterruptedException {
+    public void testAddProduct() throws InterruptedException {
 
         JavascriptExecutor jse = (JavascriptExecutor)wd;
         long unixTime = System.currentTimeMillis() / 1000L;

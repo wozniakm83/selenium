@@ -1,6 +1,7 @@
 package pl.sel.selenium.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -10,7 +11,7 @@ public class CustomerRegistrationTest extends TestBase {
     public void testCustomerRegistration() {
 
         app.goTo().userRegistrationPage();
-
+        JavascriptExecutor jse = (JavascriptExecutor)wd;
         long unixTime = System.currentTimeMillis() / 1000L;
         String taxId = String.format("%s", unixTime).substring(0,7);
         String company = "Damage, Inc.";
@@ -43,6 +44,8 @@ public class CustomerRegistrationTest extends TestBase {
         customerForm.findElement(By.cssSelector("input[name='newsletter']")).sendKeys(newsletter);
         customerForm.findElement(By.cssSelector("input[name='password']")).sendKeys(password);
         customerForm.findElement(By.cssSelector("input[name='confirmed_password']")).sendKeys(password);
+
+        jse.executeScript("scroll(0, 500);");
         customerForm.findElement(By.cssSelector("button[name='create_account']")).click();
 
         wd.findElement(By.cssSelector("#box-account > div > ul > li:nth-child(4) > a")).click();
