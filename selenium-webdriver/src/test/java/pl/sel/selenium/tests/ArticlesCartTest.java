@@ -27,8 +27,8 @@ public class ArticlesCartTest extends TestBase {
 
         app.goTo().mainPage();
         while(count < 3) {
-            int select = new Random().nextInt(5-1) + 1;
-            jse.executeScript("window.scrollBy(0,250)", "");
+            int select = new Random().nextInt(5-0) + 1;
+            jse.executeScript("scroll(0, 250);");
             WebElement article = wd.findElement(By.cssSelector(String.format("#box-most-popular > div > ul > li:nth-child(%s) > a.link", select)));
             if(!titles.contains(article.getAttribute("title"))) {
                 titles.add(article.getAttribute("title"));
