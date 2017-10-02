@@ -1,6 +1,7 @@
 package pl.sel.selenium.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -21,6 +22,7 @@ public class AdminAddArticleTest extends TestBase {
     @Test
     public void testAddArticle() throws InterruptedException {
 
+        JavascriptExecutor jse = (JavascriptExecutor)wd;
         long unixTime = System.currentTimeMillis() / 1000L;
         String productName = String.format("product_name_%s", unixTime);
 
@@ -36,7 +38,9 @@ public class AdminAddArticleTest extends TestBase {
         generalTab.findElement(By.cssSelector("input[name='code']")).sendKeys("code");
         List<WebElement> categories = generalTab.findElements(By.cssSelector("input[name='categories[]']"));
         for (WebElement category : categories) {
-            if (!category.isSelected()) {
+            if (category.getAttribute("data-name").equals("Rubber Ducks") && !category.isSelected()) {
+                category.click();
+            } else if(category.isSelected()) {
                 category.click();
             }
         }
@@ -58,6 +62,7 @@ public class AdminAddArticleTest extends TestBase {
                 .sendKeys(Keys.HOME + "2018" + Keys.TAB + "0101");
         generalTab.findElement(By.cssSelector("input[name='date_valid_to']"))
                 .sendKeys(Keys.HOME + "2019" + Keys.TAB + "0101");
+        jse.executeScript("scroll(0, 0);");
 
         wd.findElement(By.cssSelector("#content a[href='#tab-information']")).click();
         WebElement informationTab = wd.findElement(By.cssSelector("#tab-information"));
@@ -67,6 +72,7 @@ public class AdminAddArticleTest extends TestBase {
         informationTab.findElement(By.cssSelector("div.trumbowyg-editor")).sendKeys(Keys.HOME + "description");
         informationTab.findElement(By.cssSelector("input[name='head_title[en]']")).sendKeys("head title");
         informationTab.findElement(By.cssSelector("input[name='meta_description[en]']")).sendKeys("meta description");
+        jse.executeScript("scroll(0, 0);");
 
         wd.findElement(By.cssSelector("#content a[href='#tab-prices']")).click();
         WebElement pricesTab = wd.findElement(By.cssSelector("#tab-prices"));
@@ -91,6 +97,7 @@ public class AdminAddArticleTest extends TestBase {
         wd.findElement(By.xpath("//*[@id='content']/form/p/span/button[@name='save']")).click();
 
         wd.findElement(By.cssSelector("#doc-catalog > a")).click();
+        wd.findElement(By.linkText("Rubber Ducks")).click();
         if (!isElementPresent(By.linkText(productName))) {
             System.out.println("Product not found");
         }
