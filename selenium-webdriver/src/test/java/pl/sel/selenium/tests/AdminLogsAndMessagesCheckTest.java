@@ -26,7 +26,6 @@ public class AdminLogsAndMessagesCheckTest extends TestBase {
         wd.findElement(By.cssSelector("#app-:nth-child(2) > a > span.name")).click();
         wd.findElement(By.cssSelector("#doc-catalog > a")).click();
         wd.findElement(By.linkText("Rubber Ducks")).click();
-        String productsUrl = wd.getCurrentUrl();
         List<WebElement> products = wd.findElements(By.cssSelector(
                 "#content td:nth-child(3) > a[href*='&doc=edit_product'][href*='&product_id=']")
         );
