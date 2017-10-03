@@ -24,10 +24,12 @@ public class ApplicationManager {
     WebDriverWait wait;
 
     private String browser;
-    private ProductHelper productHelper;
+    private CartHelper cartHelper;
     private CustomerHelper customerHelper;
-    private SessionHelper sessionHelper;
+    private MainPageHelper mainPageHelper;
     private NavigationHelper navigationHelper;
+    private ProductHelper productHelper;
+    private SessionHelper sessionHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -37,9 +39,11 @@ public class ApplicationManager {
     public void init() throws Exception {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-        productHelper = new ProductHelper(this);
+        cartHelper = new CartHelper(this);
         customerHelper = new CustomerHelper(this);
+        mainPageHelper = new MainPageHelper(this);
         navigationHelper = new NavigationHelper(this);
+        productHelper = new ProductHelper(this);
         sessionHelper = new SessionHelper(this);
     }
 
@@ -49,17 +53,23 @@ public class ApplicationManager {
         }
     }
 
-    public ProductHelper article() {
-        return productHelper;
-    }
+    public CartHelper cart() { return cartHelper; }
 
     public CustomerHelper customer() { return customerHelper; }
+
+    public MainPageHelper mainpage() {
+        return mainPageHelper;
+    }
+
+    public NavigationHelper goTo() { return navigationHelper; }
+
+    public ProductHelper product() {
+        return productHelper;
+    }
 
     public SessionHelper login() {
         return sessionHelper;
     }
-
-    public NavigationHelper goTo() { return navigationHelper; }
 
     public void startChrome() throws Exception {
         ChromeOptions options = new ChromeOptions();

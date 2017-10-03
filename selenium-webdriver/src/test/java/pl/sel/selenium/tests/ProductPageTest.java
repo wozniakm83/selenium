@@ -16,10 +16,10 @@ public class ProductPageTest extends TestBase {
         app.goTo().mainPage();
         JavascriptExecutor jse = (JavascriptExecutor)wd;
         WebElement product = wd.findElement(By.cssSelector("#box-campaigns > div > ul > li > a.link"));
-        ProductDisplay productDisplayOnMainPage = app.article().displayOnMainPage(product);
+        ProductDisplay productDisplayOnMainPage = app.product().displayOnMainPage(product);
         System.out.println(productDisplayOnMainPage);
         jse.executeScript("scroll(0, 500);");
-        ProductDisplay productDisplayOnProductPage = app.article().displayOnProductPage(product);
+        ProductDisplay productDisplayOnProductPage = app.product().displayOnProductPage(product);
         System.out.println(productDisplayOnProductPage);
         assertThat(productDisplayOnMainPage, equalTo(productDisplayOnProductPage)); // SHOULD FAIL
     }

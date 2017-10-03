@@ -21,6 +21,7 @@ public class AdminCountriesOrderTest extends TestBase{
 
     @Test
     public void testCountriesOrder() {
+        JavascriptExecutor jse = (JavascriptExecutor)wd;
         wd.findElement(By.cssSelector("#app-:nth-child(3) > a > span.name")).click();
         assertThat(wd.getCurrentUrl(), equalTo(app.properties.getProperty("litecart.adminCountries")));
         List<WebElement> countries = wd.findElements(By.cssSelector("#content > form[name='countries_form'] tr.row"));
@@ -46,6 +47,7 @@ public class AdminCountriesOrderTest extends TestBase{
                 isSorted(zonesList);
                 wd.get(app.properties.getProperty("litecart.adminCountries"));
             }
+            jse.executeScript("window.scrollBy(0,30)", "");
         }
         System.out.println(countriesList);
     }
