@@ -27,6 +27,7 @@ public class AdminCountriesOrderTest extends TestBase{
         List<WebElement> countries = wd.findElements(By.cssSelector("#content > form[name='countries_form'] tr.row"));
         ArrayList countriesList = new ArrayList<>();
         for (int i = 1; i <= countries.size(); i++) {
+            jse.executeScript(String.format("scroll(0, %s);", i*28));
             String countryName = wd.findElement(
                     By.cssSelector(String.format("tr:nth-child(%s) > td:nth-child(5) > a", i+1))).getAttribute("text");
             countriesList.add(countryName);
@@ -47,7 +48,6 @@ public class AdminCountriesOrderTest extends TestBase{
                 isSorted(zonesList);
                 wd.get(app.properties.getProperty("litecart.adminCountries"));
             }
-            jse.executeScript("window.scrollBy(0,30)", "");
         }
         System.out.println(countriesList);
     }
