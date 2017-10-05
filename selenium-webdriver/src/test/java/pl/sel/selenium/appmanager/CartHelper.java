@@ -45,7 +45,7 @@ public class CartHelper extends HelperBase {
     }
 
     public void returnToMainPage() {
-        jse.executeScript("scroll(0, 0);");
+        app.goTo().pageTop();
         wd.findElement(By.cssSelector("#logotype-wrapper > a")).click();
     }
 }

@@ -1,14 +1,9 @@
 package pl.sel.selenium.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pl.sel.selenium.model.ProductDisplay;
-
-import java.util.concurrent.TimeUnit;
 
 public class ProductHelper extends HelperBase {
 

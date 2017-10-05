@@ -26,11 +26,7 @@ public class NavigationHelper extends HelperBase {
 
     public void userRegistrationPage() {
         app.goTo().mainPage();
-/*        if(isElementPresent(By.tagName("h1"))
-                && wd.findElement(By.tagName("h1")).getText().equals("Create Account")) {
-            return;
-        }*/
-        wd.findElement(By.cssSelector("#box-account-login a")).click();
+        wd.findElement(By.cssSelector("#box-account-login a[href='http://localhost/litecart/en/create_account']")).click();
     }
 
     public void cartPage() {

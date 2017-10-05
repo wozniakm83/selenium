@@ -24,7 +24,6 @@ public class ApplicationManager {
     public final Properties properties;
     WebDriver wd;
     WebDriverWait wait;
-    JavascriptExecutor jse;
 
     private String browser;
     private CartHelper cartHelper;
