@@ -1,6 +1,7 @@
 package pl.sel.selenium.appmanager;
 
 import org.openqa.selenium.HasCapabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -22,6 +24,7 @@ public class ApplicationManager {
     public final Properties properties;
     WebDriver wd;
     WebDriverWait wait;
+    JavascriptExecutor jse;
 
     private String browser;
     private CartHelper cartHelper;

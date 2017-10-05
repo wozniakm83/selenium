@@ -26,12 +26,19 @@ public class NavigationHelper extends HelperBase {
 
     public void userRegistrationPage() {
         app.goTo().mainPage();
-        if(isElementPresent(By.tagName("h1"))
+/*        if(isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Create Account")) {
             return;
-        }
+        }*/
         wd.findElement(By.cssSelector("#box-account-login a")).click();
     }
-}
 
-// > div > form > table > tbody > tr:nth-child(5) > td >
+    public void cartPage() {
+        app.goTo().mainPage();
+        wd.findElement(By.cssSelector("#cart > a.content")).click();
+    }
+
+    public void pageTop() {
+        jse.executeScript("scroll(0, 0);");
+    }
+}

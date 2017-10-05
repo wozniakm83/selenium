@@ -1,20 +1,24 @@
 package pl.sel.selenium.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
 
     protected ApplicationManager app;
     protected WebDriver wd;
+    protected WebDriverWait wait;
+    protected JavascriptExecutor jse;
 
     public HelperBase(ApplicationManager app) throws Exception {
         this.app = app;
         this.wd = app.getDriver();
+        this.wait = new WebDriverWait(wd, 10);
+        this.jse = (JavascriptExecutor)wd;
     }
 
     protected void click(By locator) {
